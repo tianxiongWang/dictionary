@@ -14,13 +14,11 @@ class Server(object):
 	def server_forever(self):
 		self.Socket.listen(5)
 		self.Socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-		self.Thread_pool = []
 		while True:
 			c, addr = self.Socket.accept()
 			print('%s已连接' % str(addr))
 			t = threading.Thread(target = self.MultiThread, args = (c,))
 			t.daemon = True
-			self.Thread_pool.append(t)
 			t.start()
 	def MultiThread(self, *args):
 		c = args[0]
@@ -29,8 +27,6 @@ class Server(object):
 			if not data:
 				c.close()
 				break
-			#print(data.decode())
-			
 def main():
 	addr = ('127.0.0.1',8421)
 	A = Server(addr)
