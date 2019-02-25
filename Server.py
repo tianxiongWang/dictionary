@@ -1,7 +1,4 @@
-from Class import Server
-
-addr = ('127.0.0.1',8888)
-A = Server(addr)
-A.Socket.listen(5)
-c,addr = A.Socket.accept()
-print(addr)
+import socket
+class Server(object):
+	def __init__(self, addr):
+		self.Socket = socket.socket()
